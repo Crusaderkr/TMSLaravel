@@ -1,0 +1,49 @@
+---
+config:
+  layout: dagre
+  look: neo
+  theme: mc
+---
+flowchart TD
+ subgraph User_Side["User Side"]
+        U1["Login / Register"]
+        U2["Create Ticket"]
+        U3["View Ticket Status"]
+        U4["Add Comments"]
+        U5["Request Reassignment"]
+        U6["Change Status"]
+  end
+ subgraph System["Ticket Management System - Laravel + Inertia + React"]
+        S1["Auth Controller - Sanctum"]
+        S2["Ticket Controller - CRUD"]
+        S3["Assignment Module"]
+        S4["Notification / Event Broadcasting"]
+        S5["Database - MySQL/MongoDB"]
+  end
+ subgraph Admin_Side["Admin Dashboard"]
+        A1["View All Tickets"]
+        A2["Assign/Reassign Tickets"]
+        A3["Change Status"]
+        A4["Generate Reports"]
+        A5["Delete/Restore Ticket"]
+  end
+ subgraph s1["Untitled subgraph"]
+        n1["Untitled Node"]
+  end
+    U1 --> S1
+    S1 --> S5
+    U2 --> S2
+    S2 --> S5 & U3
+    A1 --> S2
+    A2 --> S3
+    A3 --> S2
+    A4 --> S5
+    U4 --> S2
+    S4 --> U3
+    U5 --> S3
+    A5 --> S2
+    U6 --> S2
+    n2["Text Block"]
+    n3["Sample Label"]
+    n2@{ shape: text}
+    n3@{ icon: "mc:default", pos: "b"}

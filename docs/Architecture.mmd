@@ -1,0 +1,9 @@
+---
+config:
+  layout: dagre
+---
+flowchart TD
+    A["User / Client"] -- Create/View Tickets/Request Reassignment --> B[("Ticket Management System")]
+    B -- Assign Tickets / Manage Users/ Delete/Restore tickets --> C["Admin"]
+    C -- Updates, Comments --> B
+    B -- Notifications / Updates --> A

@@ -1,0 +1,64 @@
+---
+config:
+  layout: dagre
+---
+erDiagram
+    USERS {
+        int id PK
+        string name
+        string email
+        string password
+        int role_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    ROLES {
+        int id PK
+        string role_name
+        string description
+        datetime created_at
+        datetime updated_at
+    }
+    TICKETS {
+        int id PK
+        int user_id FK
+        string title
+        text description
+        string priority
+        string status
+        datetime created_at
+        datetime updated_at
+        int deleted_by FK
+        datetime deleted_at
+    }
+    COMMENTS {
+        int id PK
+        int ticket_id FK
+        int user_id FK
+        text comment
+        datetime created_at
+        datetime updated_at
+    }
+    ASSIGNMENTS {
+        int id PK
+        int ticket_id FK
+        int assigned_by FK
+        int assigned_to FK
+        datetime assigned_at
+        datetime updated_at
+    }
+    NOTIFICATIONS {
+        int id PK
+        int user_id FK
+        string type
+        string message
+        boolean is_read
+        datetime created_at
+    }
+    ROLES ||--o{ USERS : "has many"
+    USERS ||--o{ TICKETS : "creates"
+    USERS ||--o{ COMMENTS : "writes"
+    USERS ||--o{ ASSIGNMENTS : "assigns / receives"
+    TICKETS ||--o{ COMMENTS : "has many"
+    TICKETS ||--o{ ASSIGNMENTS : "can be assigned"
+    USERS ||--o{ NOTIFICATIONS : "receives"
